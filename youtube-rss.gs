@@ -74,7 +74,7 @@ function ytSubsRecentVideos() {
       
       var videos = YouTube.Search.list('id,snippet', {
         channelId: channelId,
-        maxResults: 3,
+        maxResults: 10,
         order: 'date'
       });
       
@@ -83,7 +83,7 @@ function ytSubsRecentVideos() {
         var videoTitle = video.snippet.title;
         var videoDescription = video.snippet.description;
         var videoId = video.id.videoId;
-        var videoURL = "https://youtu.be/"+videoId;
+        var videoURL = 'https://www.youtube.com/watch?v=' + videoId;
         var videoPublishedAt = video.snippet.publishedAt;
         //Logger.log('Video: %s VideoID: %s VideoTime: %s', videoTitle, videoId, videoPublishedAt);
         result.push({videoId: videoId, 
@@ -135,11 +135,11 @@ function jsonToRss(items, feed) {
       var rss = "";
       
       if (len) {
-        rss = '<?xml version="1.0"?>'+"\n"
+        rss = '<?xml version="1.0" encoding="UTF-8"?>'+"\n"
         rss += '<rss version="2.0">'+"\n";
         rss += ' <channel>'+"\n";
         rss += '  <title>' + "Yt subscription feeds" + '</title>'+"\n";
-        rss += '  <link>' + htmlentities(feed) + '</link>'+"\n";
+        rss += '  <link>' + htmlentities('https://www.youtube.com/feed/subscriptions') + '</link>'+"\n";
         rss += '  <description>' + "Youtube feed made by Google apps script. Updatable every " + CACHETIME + " seconds" + '</description>'+"\n";
         var today = new Date();
         rss += '  <pubDate>' + today.toUTCString() + '</pubDate>'+"\n";
@@ -193,5 +193,3 @@ function doGetTest() {
   
   doGet();
 }
-
-
