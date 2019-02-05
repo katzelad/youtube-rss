@@ -83,6 +83,8 @@ function ytSubsRecentVideos() {
         var videoTitle = video.snippet.title;
         var videoDescription = video.snippet.description;
         var videoId = video.id.videoId;
+        if (!videoId)
+          continue;
         var videoURL = 'https://www.youtube.com/watch?v=' + videoId;
         var videoPublishedAt = video.snippet.publishedAt;
         //Logger.log('Video: %s VideoID: %s VideoTime: %s', videoTitle, videoId, videoPublishedAt);
@@ -108,7 +110,7 @@ function ytSubsRecentVideos() {
                 b = new Date(b.videoPublishedAt);
                 return a>b ? -1 : a<b ? 1 : 0;
               });
-  result = result.slice(0, 10);
+  result = result.slice(0, 20);
   //for  (var i = 0; i < 5; i++) Logger.log("Sortedvideo " + i + ": " + result[i].videoTitle);
   return result;
 }
